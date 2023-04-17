@@ -86,6 +86,142 @@ async def handle_callback_query(client, callback_query):
         link = link['link']
         action = callback_query.matches[0].group(1)
         await callback_query.message.edit("Downloading...")
+        if service == 'spotify':
+            if link_type == 'album':
+                dl = await download.download_albumspo(
+                    link, output_dir="tmp", 
+                    quality_download='FLAC',     
+                    recursive_download=True,
+                    recursive_quality=True, 
+                    not_interface=True
+                )
+            elif link_type == 'playlist':
+                dl = await download.download_playlistspo(
+                    link, output_dir="tmp",
+                    quality_download='FLAC',
+                    recursive_download=True,
+                    recursive_quality=True,
+                    not_interface=True
+                )
+            elif link_type == 'track':
+                dl = await download.download_trackspo(
+                    link, output_dir="tmp",
+                    quality_download='FLAC',
+                    recursive_download=True,
+                    recursive_quality=True,
+                    not_interface=True
+                )
+                if action == 'tg':
+                    await callback_query.message.reply_audio(
+                        dl.song_path,
+                        duration=int(utils.get_flac_duration(dl.song_path))
+                    )
+                    await callback_query.message.edit('Processed!')
+                else:
+                    file = drive.CreateFile({
+                            'title': dl.song_path.split('/')[-2],
+                            'parents': [{
+                            'teamDriveId': '0AMjb_3kLleNAUk9PVA',
+                            'id': '1yltuyFBLxUPmwVPDd5tlx0zL4z0BKr8A'
+                        }]
+                    })
+                    file.SetContentFile(dl.song_path)
+                    file.Upload(param={'supportsTeamDrives': True})
+                    url = f"https://drive.google.com/file/d/{file['id']}/view"
+                    url2 = f"https://files.tonystarkuseless1.workers.dev/1:/Songs/{quote(string=dl.song_path.split('/')[-2])}"
+                return await callback_query.message.edit("Processed!", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Google Drive", url=url), InlineKeyboardButton("Link", url=url2)]]) if url else None)
+
+        else:
+            if link_type == 'album':
+                dl = await download.download_albumspo(
+                    link, output_dir="tmp",
+                    quality_download='FLAC',
+                    recursive_download=True,
+                    recursive_quality=True,
+                    not_interface=True
+                )
+            elif link_type == 'playlist':
+                dl = await download.download_playlistspo(
+                    link, output_dir="tmp",
+                    quality_download='FLAC',
+                    recursive_download=True,
+                    recursive_quality=True,
+                    not_interface=True
+                )
+            elif link_type == 'track':
+                dl = await download.download_trackspo(
+                    link, output_dir="tmp",
+                    quality_download='FLAC',
+                    recursive_download=True,
+                    recursive_quality=True,
+                    not_interface=True
+                )
+                if action == 'tg':
+                    await callback_query.message.reply_audio(
+                        dl.song_path,
+                        duration=int(utils.get_flac_duration(dl.song_path))
+                    )
+                    await callback_query.message.edit('Processed!')
+                else:
+                    file = drive.CreateFile({
+                            'title': dl.song_path.split('/')[-2],
+                            'parents': [{
+                            'teamDriveId': '0AMjb_3kLleNAUk9PVA',
+                            'id': '1yltuyFBLxUPmwVPDd5tlx0zL4z0BKr8A'
+                        }]
+                    })
+                    file.SetContentFile(dl.song_path)
+                    file.Upload(param={'supportsTeamDrives': True})
+                    url = f"https://drive.google.com/file/d/{file['id']}/view"
+                    url2 = f"https://files.tonystarkuseless1.workers.dev/1:/Songs/{quote(string=dl.song_path.split('/')[-2])}"
+                return await callback_query.message.edit("Processed!", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Google Drive", url=url), InlineKeyboardButton("Link", url=url2)]]) if url else None)
+
+        await callback_query.message.edit("Uploading...")
+        if action == 'tg':
+            for song in dl.tracks:
+                await callback_query.message.reply_audio(
+                    song.song_path,
+                    duration=int(utils.get_flac_duration(song.song_path))
+                )
+        else:
+            name = dl.tracks[0].song_path.split('/')[-2]
+            shutil.make_archive(name, 'zip', 'tmp')
+            file = drive.CreateFile({
+                        'title': f'{name}.zip',
+                        'parents': [{
+                        'teamDriveId': '0AMjb_3kLleNAUk9PVA',
+                        'id': '1yltuyFBLxUPmwVPDd5tlx0zL4z0BKr8A'
+                    }]
+            })
+            file.SetContentFile(f'{name}.zip')
+            file.Upload(param={'supportsTeamDrives': True})
+            url = f"https://drive.google.com/file/d/{file['id']}/view"
+            url2 = f"https://files.tonystarkuseless1.workers.dev/1:/Songs/{quote(string=name)}.zip"
+            os.remove(f'{name}.zip')
+        for path in dl.tracks:
+            try: shutil.rmtree(os.path.dirname(path.song_path))
+            except: pass 
+        await callback_query.message.edit("Processed!", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Google Drive", url=url), InlineKeyboardButton("Link", url=url2)]]) if url else None
+        )
+    except Exception as error:
+        await callback_query.message.reply(f"Error : {error}")
+        raise error 
+
+
+@bot.on_callback_query(filters.regex("(gd|tg)_(.+)"))
+async def handle_callback_query(client, callback_query):
+    try:
+        url = None 
+        await callback_query.message.edit("Processing...")
+        link = links.find_one({"_id": ObjectId(callback_query.matches[0].group(2))})
+        if link is None:
+            await callback_query.answer("Timeout!", show_alert=True)
+            return
+        link_type = link['type']
+        service = link['service']
+        link = link['link']
+        action = callback_query.matches[0].group(1)
+        await callback_query.message.edit("Downloading...")
         if service == 'deezer':
             if link_type == 'album':
                 dl = await download.download_albumdee(
