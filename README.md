@@ -8,10 +8,15 @@ Install the required packages using "pip install -r requirements.txt".
 Do this thing in keys.py:
 
 api_id = "<your_telegram_api_id>"
+
 api_hash = "<your_telegram_api_hash>"
+
 bot_token = "<your_telegram_bot_token>"
+
 service_file = "client_secrets.json" (no need to rename this thing, leave as it is)
+
 db_url = "<your_mongodb_connection_string>"
+
 deezer_api = "<your_deezer_api_key>" (deezer API means Deezer ARL)
 
 Run the bot using python main.py.
