@@ -3,7 +3,7 @@ Telegram Deezer Bot
 
 
 
-clone this repo or dow whatever and make this repo private 
+clone this repo or do whatever and make this repo private 
 
 
 Install the required packages using "pip install -r requirements.txt"
