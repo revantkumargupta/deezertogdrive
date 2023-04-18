@@ -25,7 +25,7 @@ service_file = "client_secrets.json"     no need to rename this thing,leave as i
 
 db_url = "<your_mongodb_connection_string>"
 
-deezer_api = "<your_deezer_api_key>"
+deezer_api = "<your_deezer_api_key>"     deezer api means deezer ARL 
 
 
 Run the bot using python main.py.
@@ -35,7 +35,7 @@ Run the bot using python main.py.
 
 
 
-deezer api means deezer ARL 
+
 
 
 for db url you can follow this step 
