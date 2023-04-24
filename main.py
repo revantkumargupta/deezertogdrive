@@ -49,7 +49,8 @@ drive = GoogleDrive(gauth)
 
 @bot.on_message(filters.command("start"))
 async def start_message(client, message):
-    await message.reply_text("Hello")
+    await message.reply_text("It downloads songs from Deezer and currently supports links from Deezer and Spotify
+")
 
 
 @bot.on_message(filters.regex(r"^https?:\/\/(?:www\.)?deezer\.com\/([a-z]*\/)?album\/(\d+)\/?$"))
