@@ -26,15 +26,18 @@ service_file = "client_secrets.json"     no need to rename this thing,leave as i
 db_url = "<your_mongodb_connection_string>"
 
 deezer_api = "<your_deezer_api_key>"
-
-Run the bot using python main.py.
-
-
-
-
-
-
+SERVICE_FILE_URL= index link of client_secrets.json
 deezer api means deezer ARL 
+TRACK_TOKEN=same as deezer api(ARL)
+
+Run the bot using python3 main.py.
+
+
+
+
+
+
+
 
 
 for db url you can follow this step 
@@ -59,20 +62,20 @@ don't forget to add your service account in your shared drive with content manag
 
 
 for google drive support
-go to line 124 ,you will se id ,that is your shared drive/teamdrive id 
+
 https://photos.app.goo.gl/jMYVjNqeXf3Dds7n9
 for eg i got this link https://drive.google.com/drive/folders/0AMjb_3kLleNAUk9PVA
 my teamdrive /shared drive is 0AMjb_3kLleNAUk9PVA
-so just replace this string "0AMjb_3kLleNAUk9PVA" in that code
+so just put this string "0AMjb_3kLleNAUk9PVA" i
 https://photos.app.goo.gl/s2qNnFqwSJpL3ci96
 
 
 
 
-and in line 125 you have to get folder id means create any folder and get id of that folder 
+ to get folder id means create any folder and get id of that folder 
 for eg i got this link https://drive.google.com/drive/folders/1yltuyFBLxUPmwVPDd5tlx0zL4z0BKr8A
 so my folder id is 1yltuyFBLxUPmwVPDd5tlx0zL4z0BKr8A
-just replace with your folder id in that line of code 
+
 
 https://photos.app.goo.gl/1wAnxqs3hD85YxCS6
 
@@ -81,9 +84,9 @@ https://photos.app.goo.gl/1wAnxqs3hD85YxCS6
 
 
 for index link
-go to line 131 
+
 copy index link of your folder from which you have got id 
-and replace with mine
+
 
 https://photos.app.goo.gl/wihavxbBJgKgtSN87
 
@@ -92,4 +95,3 @@ https://photos.app.goo.gl/wihavxbBJgKgtSN87
 
 
 
-now do same thing for line 169 ,170,176,192,193,199,260,261,267,305,306,312,328,329,335
