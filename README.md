@@ -66,7 +66,7 @@ for google drive support
 https://photos.app.goo.gl/jMYVjNqeXf3Dds7n9
 for eg i got this link https://drive.google.com/drive/folders/0AMjb_3kLleNAUk9PVA
 my teamdrive /shared drive is 0AMjb_3kLleNAUk9PVA
-so just put this string "0AMjb_3kLleNAUk9PVA" i
+so just put this string "0AMjb_3kLleNAUk9PVA"
 https://photos.app.goo.gl/s2qNnFqwSJpL3ci96
 
 
