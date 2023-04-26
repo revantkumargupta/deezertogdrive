@@ -12,8 +12,16 @@
     }
   ],
   "buildpacks": [
-    { "url": "heroku/python" }
+    {
+      "url": "heroku/python"
+    }
   ],
+  "stack": "heroku-20",
+  "environments": {
+    "python": {
+      "version": "3.9.7"
+    }
+  },
   "env": {
     "API_HASH": "<YOUR_API_HASH>",
     "API_ID": "<YOUR_API_ID>",
@@ -22,7 +30,7 @@
     "DEEZER_API": "<YOUR_DEEZER_API_KEY>",
     "FOLDER_ID": "<YOUR_GOOGLE_DRIVE_FOLDER_ID>",
     "INDEX_LINK": "<YOUR_INDEX_LINK>",
-    "SERVICE_FILE": "<YOUR_SERVICE_FILE>",
+    "SERVICE_FILE": "client_secrets.json",
     "SERVICE_FILE_URL": "<YOUR_SERVICE_FILE_URL>",
     "TEAM_DRIVE_ID": "<YOUR_GOOGLE_TEAM_DRIVE_ID>",
     "TRACK_TOKEN": "<YOUR_TRACK_TOKEN>"
