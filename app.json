@@ -1,0 +1,30 @@
+{
+  "name": "DeezerToGDrive",
+  "description": "A tool for transferring Deezer playlists to Google Drive",
+  "keywords": ["Deezer", "Google Drive", "playlist", "transfer"],
+  "website": "https://github.com/revantkumargupta/deezertogdrive",
+  "repository": "https://github.com/revantkumargupta/deezertogdrive", 
+  "image": "",
+  "addons": [
+    {
+      "plan": "heroku-postgresql",
+      "as": "DATABASE"
+    }
+  ],
+  "buildpacks": [
+    { "url": "heroku/python" }
+  ],
+  "env": {
+    "API_HASH": "<YOUR_API_HASH>",
+    "API_ID": "<YOUR_API_ID>",
+    "BOT_TOKEN": "<YOUR_BOT_TOKEN>",
+    "DB_URL": "<YOUR_DATABASE_URL>",
+    "DEEZER_API": "<YOUR_DEEZER_API_KEY>",
+    "FOLDER_ID": "<YOUR_GOOGLE_DRIVE_FOLDER_ID>",
+    "INDEX_LINK": "<YOUR_INDEX_LINK>",
+    "SERVICE_FILE": "<YOUR_SERVICE_FILE>",
+    "SERVICE_FILE_URL": "<YOUR_SERVICE_FILE_URL>",
+    "TEAM_DRIVE_ID": "<YOUR_GOOGLE_TEAM_DRIVE_ID>",
+    "TRACK_TOKEN": "<YOUR_TRACK_TOKEN>"
+  }
+}
