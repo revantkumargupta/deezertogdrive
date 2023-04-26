@@ -1,5 +1,6 @@
 # deezertogdrivebot
 Telegram Deezer Bot
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/revantkumargupta/deezertogdrive)
 
 
 
