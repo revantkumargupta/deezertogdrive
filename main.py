@@ -57,9 +57,10 @@ async def start_message(client, message):
 @bot.on_message(filters.regex(r"^https?:\/\/(?:www\.)?deezer\.com\/([a-z]*\/)?playlist\/(\d+)\/?$"))
 async def deezer_input(client, message):
     item_id = message.matches[0].group(2)
-    if re.match(r"^https?:\/\/(?:www\.)?deezer\.com\/([a-z]*\/)?playlist\/(\d+)\/?$", message.text):
-        media_type = 'playlist'
-        title = None
+    if re.match(r"^https?:\/\/(?:www\.)?deezer\.com\/([a-z]*\/)?album\/(\d+)\/?$", message.text):
+        media_type = 'album'
+        data = requests.get(f"https://api.deezer.com/album/{item_id}").json()
+        title = data.get('title')
         
     elif re.search("https://www.deezer.com/track/", message.text):
         media_type = "track"
@@ -75,9 +76,9 @@ async def deezer_input(client, message):
             ]]
         ))
     else:
-        media_type = 'album'
-        data = requests.get(f"https://api.deezer.com/album/{item_id}").json()
-        cover = data.get('cover_medium')
+        media_type = 'playlist'
+        data = requests.get(f"https://api.deezer.com/playlist/{item_id}").json()
+        cover = data.get('picture_medium')
         item_link = data.get('link')
         title = data.get('title')
         await message.reply_photo(cover, caption=data.get('title', ''), reply_markup=InlineKeyboardMarkup(
@@ -92,7 +93,6 @@ async def deezer_input(client, message):
             InlineKeyboardButton("Telegram", callback_data=f"tg_{link.inserted_id}")
         ]]
     ))
-
 
 @bot.on_message(filters.regex(r"^https://open.spotify.com/album"))
 @bot.on_message(filters.regex(r"^https://open.spotify.com/track"))
