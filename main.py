@@ -52,19 +52,19 @@ async def start_message(client, message):
     await message.reply_text("It downloads songs from Deezer and currently supports links from Deezer and Spotify")
 
 
-@bot.on_message(filters.regex(r"https?:\/\/(?:www\.)?deezer\.com\/[a-z]*\/track\/(\d+)") | filters.regex(r"https?:\/\/deezer\.com\/[a-z]*\/track\/(\d+)"))
-@bot.on_message(filters.regex(r"https?:\/\/(?:www\.)?deezer\.com\/[a-z]*\/album\/(\d+)") | filters.regex(r"https?:\/\/deezer\.com\/[a-z]*\/album\/(\d+)"))
-@bot.on_message(filters.regex(r"https?:\/\/(?:www\.)?deezer\.com\/[a-z]*\/playlist\/(\d+)") | filters.regex(r"https?:\/\/deezer\.com\/[a-z]*\/playlist\/(\d+)"))
+@bot.on_message(filters.regex(r"^https?:\/\/(?:www\.)?deezer\.com\/([a-z]*\/)?album\/(\d+)\/?$"))
+@bot.on_message(filters.regex(r"https?:\/\/(?:www\.)?deezer\.com\/([a-z]*\/)?track\/(\d+)\/?$"))
+@bot.on_message(filters.regex(r"^https?:\/\/(?:www\.)?deezer\.com\/([a-z]*\/)?playlist\/(\d+)\/?$"))
 async def deezer_input(client, message):
-    item_id = message.matches[0].group(1)
-    if re.match(r"^https?:\/\/(?:www\.)?deezer\.com\/[a-z]*\/album\/\d+\/?$", message.text):
+    item_id = message.matches[0].group(2)
+    if re.match(r"^https?:\/\/(?:www\.)?deezer\.com\/([a-z]*\/)?album\/(\d+)\/?$", message.text):
         media_type = 'album'
-        data = requests.get(f"https://api.deezer.com/{media_type}/{item_id}").json()
+        data = requests.get(f"https://api.deezer.com/album/{item_id}").json()
         title = data.get('title')
         
-    elif re.search("https://(?:www\.)?deezer\.com\/[a-z]*\/track\/\d+", message.text):
+    elif re.search("https://www.deezer.com/track/", message.text):
         media_type = "track"
-        data = requests.get(f"https://api.deezer.com/{media_type}/{item_id}").json()
+        data = requests.get(f"https://api.deezer.com/track/{item_id}").json()
         cover = data.get('album', {}).get('cover_medium')
         cover_link = data.get('album', {}).get('link')
         item_link = data.get('link')
@@ -77,7 +77,7 @@ async def deezer_input(client, message):
         ))
     else:
         media_type = 'playlist'
-        data = requests.get(f"https://api.deezer.com/{media_type}/{item_id}").json()
+        data = requests.get(f"https://api.deezer.com/playlist/{item_id}").json()
         cover = data.get('picture_medium')
         item_link = data.get('link')
         title = data.get('title')
