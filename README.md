@@ -1,11 +1,14 @@
 # deezertogdrivebot
 Telegram Deezer Bot
+
+
+
+
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/revantkumargupta/deezertogdrive)
 
 
 
-clone this repo or dow whatever and make this repo private 
-
+clone this repo 
 
 Install the required packages using "pip install -r requirements.txt"
 
