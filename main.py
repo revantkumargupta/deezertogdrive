@@ -41,12 +41,6 @@ download = deezloader_async.DeeLogin(deezer_api)
 try: os.mkdir("tmp")
 except FileExistsError: pass
 
-os.system(f'curl {service_file_url} -O')
-gauth = GoogleAuth()
-scope = ["https://www.googleapis.com/auth/drive"]
-gauth.credentials = ServiceAccountCredentials.from_json_keyfile_name(service_file, scope)
-drive = GoogleDrive(gauth)
-
 @bot.on_message(filters.command("start"))
 async def start_message(client, message):
     await message.reply_text("It downloads songs from Deezer and currently supports links from Deezer and Spotify")
